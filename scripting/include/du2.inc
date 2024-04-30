@@ -8,17 +8,68 @@
 const int LEN_ID = 10;				// Channel ID length less than this value is considered invalid
 const int MAX_COMMANDS = 64;		// Max commands possible in "VERIFICATION_SETTINGS" > "blocked_commands"
 
-//du_main
+/**
+ * Refreshes the IDs in the configuration file.
+ * This function reads the configuration file, updates the IDs, and saves the changes back to the file.
+ */
 native void DUMain_UpdateConfig();
+
+/**
+ * Parses the configuration file for Discord Utilities v2.
+ * If the configuration file is not found or there is an error parsing it, the function sets a fail state.
+ */
 native void DUMain_ReloadConfig();
+
+/**
+ * Checks if the configuration file has been loaded.
+ *
+ * @return bool - Returns true if the configuration file has been loaded, false otherwise.
+ */
 native bool DUMain_IsConfigLoaded();
+
+/**
+ * Get value of a variable from the configuration file
+ *
+ * @param key The key of the string value to retrieve.
+ * @param value The buffer to store the retrieved string value.
+ * @param size The size of the buffer.
+ * @return Returns true if the string value was successfully retrieved, false otherwise.
+ */
 native bool DUMain_GetString(char[] key, char[] value, int size);
+
+/**
+ * Set value of a variable from the configuration file
+ *
+ * @param key The key of the string value to retrieve.
+ * @param value The buffer to store the retrieved string value.
+ * @param size The size of the buffer.
+ * @return Returns true if the string value was successfully retrieved, false otherwise.
+ */
 native bool DUMain_SetString(char[] key, char[] value, int size);
+
+/**
+ * Recover the server password. (Not available if compiled for the l4d2 engine)
+ *
+ * @param password The array to store the server password.
+ */
 native void DUMain_GetServerPassword(char[] password);
 
+/**
+ * Retrieves the DiscordBot instance.
+ *
+ * @return The DiscordBot instance.
+ */
 native DiscordBot DUMain_Bot();
 
+
+/**
+ * This function is called when the configuration file is loaded.
+ */
 forward void DUMain_OnConfigLoaded();
+
+/**
+ * This function is called when the server password is changed. (Not available if compiled for the l4d2 engine)
+ */
 forward void DUMain_OnServerPasswordChanged(const char[] oldValue, const char[] newValue);
 
 //du_verification
